@@ -1,0 +1,40 @@
+
+.owl-carousel {
+  .item .product a {
+    overflow: hidden;
+  }
+
+  .item .product img {
+    transition: transform .5s ease;
+  }
+
+  .item .product img:hover {
+    transform: scale(1.1);
+  }
+
+  .owl-nav button {
+    position: absolute;
+    top: 30%;
+    outline: none;
+  }
+
+  .owl-nav button.owl-prev span,
+  .owl-nav button.owl-next span {
+    font-size: 35px;
+    color: $color-primary;
+  }
+
+  .owl-nav button.owl-next {
+    right: 0;
+    margin-right: -4rem;
+    padding: 0 1rem;
+  }
+
+  .owl-nav button.owl-prev {
+    left: 0;
+    margin-left: -4rem;
+    padding: 0 1rem;
+  }
+
+
+}
