@@ -1,5 +1,14 @@
 <?php
 
+// request method post
+if ($_SERVER['REQUEST_METHOD'] == "POST") {
+    if (isset($_POST['top_sale_submit'])) {
+        // call method add to cart
+        $Cart->addToCart($_POST['user_id'], $_POST['item_id']);
+    }
+}
+
+
 $item_id = $_GET['item_id'] ?? 1;
 foreach ($product->getData() as $item):
     if ($item['item_id'] == $item_id):
@@ -15,8 +24,19 @@ foreach ($product->getData() as $item):
                                 <button type="submit" class="btn btn-danger form-control">Proceed to Buy</button>
                             </div>
                             <div class="col">
-                                <button type="submit" class="btn btn-warning form-control">Add to Cart</button>
+                                <form method="post">
+                                    <input type="hidden" name="item_id" value="<?php echo $item['item_id']; ?>">
+                                    <input type="hidden" name="user_id" value="<?php echo 1; ?>">
+                                    <?php
+                                    if (in_array($item['item_id'], $Cart->getCartId($product->getData('cart')) ?? [])) {
+                                        echo '<button type="submit" disabled name="top_sale_submit" class="btn btn-success form-control">In the Cart</button>';
+                                    } else {
+                                        echo '<button type="submit" name="top_sale_submit" class="btn btn-warning form-control">Add to Cart</button>';
+                                    }
+                                    ?>
+                                </form>
                             </div>
+
                         </div>
                     </div>
                     <div class="col-sm-6 py-5">
@@ -44,7 +64,8 @@ foreach ($product->getData() as $item):
                             </tr>
                             <tr class="font-size-14 font-rale">
                                 <td>Deal Price:</td>
-                                <td class="font-size-20 text-danger">$<span><?php echo $item['item_price']; ?></span><small
+                                <td class="font-size-20 text-danger">
+                                    $<span><?php echo $item['item_price']; ?></span><small
                                             class="text-dark font-size-14">&nbsp;&nbsp;Inclusive
                                         of all taxes</small></td>
                             </tr>

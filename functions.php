@@ -19,4 +19,4 @@ $product_shuffle = $product->getData();
 // Cart object
 
 $Cart = new Cart($db);
-print_r($Cart->getCartId($product->getData('cart')));
+
